@@ -2,7 +2,7 @@
 
 Auto GNAS is a general parallel graph neural architecture search framework for different tasks on graph dataset.
 
-### Characters
+## Characters
 
 - Highly modular
 
@@ -10,7 +10,7 @@ Auto GNAS is a general parallel graph neural architecture search framework for d
 
 - Multi search method
 
-### Installing
+## Installing
 
 - python >= 3.6
 - scipy==1.1.0
