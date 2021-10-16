@@ -94,9 +94,6 @@ AutoGNAS is very friendly for users to implement customization, users can freely
 
 **4. Downstream Task Model**
 
-## Configuration File
-
-
 ## API for Parallel Estimation 
 ```python
 from autognas.parallel import ParallelOperater,ParallelConfig
