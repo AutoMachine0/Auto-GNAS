@@ -9,7 +9,7 @@
 <br>
 <br>
 <br>
-<div align=center><img src="pic/GNAS.png" width="600"/>Illustration of Graph Convolutional Neurall Architecture Search</div>
+<div align=center><img src="pic/GNAS.png" width="600"/> Illustration of Graph Convolutional Neurall Architecture Search </div>
 
 ## Characters
 
