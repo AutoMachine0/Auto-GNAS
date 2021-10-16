@@ -7,9 +7,9 @@
 - AutoGNAS suports *Graph Convolutional Neural Network Architecture* design for node, link and graph embedding on current version. 
 
 <br>
-<br>
-<br>
 <div align=center><img src="pic/GNAS.png" height="70%" width="70%"/></div>
+
+<center>Illustration of Graph Convolutional Neurall Architecture Search</center>
 
 ## Characters
 
