@@ -7,7 +7,9 @@
 - AutoGNAS suports *Graph Convolutional Neural Network Architecture* design for node, link and graph embedding on current version. 
 
 <br>
-<div align=center><img src="pic/GNAS.png"/> Illustration of Graph Convolutional Neurall Architecture Search </div>
+<br>
+<br>
+<div align=center><img src="pic/GNAS.png"/>Illustration of Graph Convolutional Neurall Architecture Search</div>
 
 ## Characters
 
@@ -61,16 +63,20 @@ pip install ray==1.2.0
 pip install scikit_learn==0.21.3
 ```
 ## Quick start
-- [*Define your graph data*](https://github.com/AutoMachine0/Auto-GNAS/blob/master/examples/graph_data_build/node_classification_graph_build.py)
-- [*Node classification task*](https://github.com/AutoMachine0/Auto-GNAS/blob/master/examples/node_classification.py)
-- [*Graph classification task*](https://github.com/AutoMachine0/Auto-GNAS/blob/master/examples/graph_classification.py)
-- [*Define your configuration file*](https://github.com/AutoMachine0/Auto-GNAS/tree/master/config/node_classification_config)
 
-## Customization
+Users can refer to the following easy cases to understand how to:  
+- [*Define your graph data*](https://github.com/AutoMachine0/Auto-GNAS/blob/master/examples/graph_data_build/node_classification_graph_build.py)
+- [*Define your configuration file*](https://github.com/AutoMachine0/Auto-GNAS/tree/master/config/node_classification_config)
+- [*Implement node classification task*](https://github.com/AutoMachine0/Auto-GNAS/blob/master/examples/node_classification.py)
+- [*Implement graph classification task*](https://github.com/AutoMachine0/Auto-GNAS/blob/master/examples/graph_classification.py)
+
+
+## User-defined
+AutoGNAS is very friendly for users to implement customization, users can freely define their own functional components as long as they follow the **specifications** and AutoGNAS will automatically load user-defined components. User can know the custom specification of each functional component in the following list, which is very simple. The list of definable components is as follows: 
 
 **1. Search Space**
 
-- Attention
+- [Attention](https://github.com/AutoMachine0/Auto-GNAS/tree/master/autognas/search_space/attention)
 - Aggregation
 - Multi-head number
 - Hidden dimension
@@ -88,8 +94,10 @@ pip install scikit_learn==0.21.3
 
 **4. Downstream Task Model**
 
+## Configuration File
 
-## API for Parallel estimation 
+
+## API for Parallel Estimation 
 ```python
 from autognas.parallel import ParallelOperater,ParallelConfig
 
@@ -157,7 +165,7 @@ model.fit()
 model.evaluate()
 ```
 
-## Default configuration
+## Default Configuration
 **1. Search Space**
 
 | Architecture Component| Value |
