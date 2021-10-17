@@ -64,7 +64,7 @@ pip install scikit_learn==0.21.3
 ```
 ## Quick start
 
-Users can refer to the following easy cases to understand how to:  
+Users can refer to the following easy cases to understand how to:
 - [*Define your graph data*](https://github.com/AutoMachine0/Auto-GNAS/blob/master/examples/graph_data_build/node_classification_graph_build.py)
 - [*Define your configuration file*](https://github.com/AutoMachine0/Auto-GNAS/tree/master/config/node_classification_config)
 - [*Implement node classification task*](https://github.com/AutoMachine0/Auto-GNAS/blob/master/examples/node_classification.py)
@@ -77,13 +77,13 @@ AutoGNAS is very friendly for users to implement customization, users can freely
 **1. Search Space**
 
 - [Attention](https://github.com/AutoMachine0/Auto-GNAS/tree/master/autognas/search_space/attention)
-- Aggregation
-- Multi-head number
-- Hidden dimension
-- Activation
+- [Aggregation](https://github.com/AutoMachine0/Auto-GNAS/tree/master/autognas/search_space/aggregation)
+- [Multi-head number](https://github.com/AutoMachine0/Auto-GNAS/tree/master/autognas/search_space/multi_heads)
+- [Hidden dimension](https://github.com/AutoMachine0/Auto-GNAS/tree/master/autognas/search_space/hidden_dimension)
+- [Activation](https://github.com/AutoMachine0/Auto-GNAS/tree/master/autognas/search_space/activation)
 - Layer number
 
-**2. Search Algorithm**
+**2. [Search Algorithm](https://github.com/AutoMachine0/Auto-GNAS/tree/master/autognas/search_algorithm)**
 
 
 **3. GNN Training**
