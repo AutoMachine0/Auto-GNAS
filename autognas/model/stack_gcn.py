@@ -294,21 +294,21 @@ class StackGcn(object):
             return False
 
 if __name__=="__main__":
-    # graph = Planetoid("cora",
-    #                   train_splits=None,
-    #                   val_splits=None,
-    #                   shuffle_flag=False).data
-    # model = StackGcn(graph,
-    #                  downstream_task_type="node_classification",
-    #                  train_epoch=300)
-
-    graph = Planetoid("ENZYMES", shuffle_flag=True).data
+    graph = Planetoid("cora",
+                      train_splits=None,
+                      val_splits=None,
+                      shuffle_flag=False).data
     model = StackGcn(graph,
-                     downstream_task_type="graph_classification",
-                     train_batch_size=200,
-                     val_batch_size=10,
-                     test_batch_size=10,
+                     downstream_task_type="node_classification",
                      train_epoch=300)
+
+    # graph = Planetoid("ENZYMES", shuffle_flag=True).data
+    # model = StackGcn(graph,
+    #                  downstream_task_type="graph_classification",
+    #                  train_batch_size=200,
+    #                  val_batch_size=10,
+    #                  test_batch_size=10,
+    #                  train_epoch=300)
 
     performance = model.fit()
     model.evaluate()

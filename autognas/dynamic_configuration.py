@@ -173,7 +173,8 @@ def attention_getter(heads,
     """
 
     search_space_path = os.path.split(os.path.realpath(__file__))[0] + "/search_space/attention"
-    attention_list = [attention for attention in os.listdir(search_space_path) if attention not in "__pycache__"]
+    attention_list = [attention for attention in os.listdir(search_space_path) if attention not in "__pycache__"
+                      and attention not in "README.md"]
     attention_dict = torch.nn.ModuleDict()
     for attention in attention_list:
         attention_class = "Attention"
@@ -200,7 +201,8 @@ def aggregation_getter():
     """
 
     search_space_path = os.path.split(os.path.realpath(__file__))[0]+ "/search_space/aggregation"
-    aggregation_list = [aggregation for aggregation in os.listdir(search_space_path) if aggregation not in "__pycache__"]
+    aggregation_list = [aggregation for aggregation in os.listdir(search_space_path) if aggregation not in "__pycache__"
+                        and aggregation not in "README.md"]
     aggregation_dict = {}
     for aggregation in aggregation_list:
         aggregation_class = "Aggregation"
@@ -226,7 +228,8 @@ def activation_getter():
     """
 
     search_space_path = os.path.split(os.path.realpath(__file__))[0] + "/search_space/activation"
-    activation_list = [activation for activation in os.listdir(search_space_path) if activation not in "__pycache__"]
+    activation_list = [activation for activation in os.listdir(search_space_path) if activation not in "__pycache__"
+                       and activation not in "README.md"]
     activation_dict = {}
     for activation in activation_list:
         activation_class = "Activation"
@@ -269,5 +272,8 @@ def data_util_class_getter():
     return data_util_dict
 
 if __name__=="__main__":
-    data_util_class_path = os.path.split(os.path.realpath(__file__))[0]
-    print(data_util_class_path)
+    # data_util_class_path = os.path.split(os.path.realpath(__file__))[0]
+    # print(data_util_class_path)
+
+    attention_dict = attention_getter(1, 64)
+    pass

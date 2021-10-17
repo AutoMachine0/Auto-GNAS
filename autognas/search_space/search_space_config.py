@@ -46,6 +46,8 @@ class SearchSpace(object):
             for name in value_name:
                 if "__" in name:
                     continue
+                elif "README" in name:
+                    continue
                 value_list.append(name[:-3])
 
             component_value_dict[component] = value_list
