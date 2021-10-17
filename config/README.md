@@ -1,4 +1,4 @@
-##  INI configuration script user-defined specification
+##  ini configuration script user-defined specification
 
 - Users only need to define their own ini configuration file according to the following template in the **user-defined area** , and then ensure you can read the config script in your main.py. 
 
