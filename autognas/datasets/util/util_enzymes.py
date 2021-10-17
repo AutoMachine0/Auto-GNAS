@@ -2,7 +2,7 @@ import os
 import copy
 import numpy as np
 import torch
-from random import shuffle
+import random
 
 class DATA(object):
 
@@ -14,7 +14,8 @@ class DATA(object):
                  dataset="ENZYMES",
                  train_splits=None,
                  val_splits=None,
-                 shuffle_flag=True):
+                 shuffle_flag=True,
+                 random_seed=None):
 
         path = os.path.split(os.path.realpath(__file__))[0][:-14] + "/datasets/ENZYMES/"
 
@@ -144,8 +145,12 @@ class DATA(object):
 
         if shuffle_flag:
 
+            if not random_seed:
+                random_seed = 123
+            random.seed(random_seed)
+
             index_list = [i for i in range(len(y))]
-            shuffle(index_list)
+            random.shuffle(index_list)
             shuffle_node_features_matrix_list = []
             shuffle_graph_edge_list = []
             shuffle_y = []

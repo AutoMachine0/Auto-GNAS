@@ -1,8 +1,8 @@
 import os
 import torch
+import random
 import numpy as np
 import torch_geometric.transforms as T
-from random import shuffle
 from torch_geometric.datasets import Planetoid
 
 class DATA(object):
@@ -15,7 +15,8 @@ class DATA(object):
                  dataset,
                  train_splits=None,
                  val_splits=None,
-                 shuffle_flag=False):
+                 shuffle_flag=False,
+                 random_seed=123):
 
         data_name = dataset
         path = os.path.split(os.path.realpath(__file__))[0][:-14] + "/datasets/CITE/" + dataset
@@ -24,11 +25,16 @@ class DATA(object):
         data = dataset[0]
 
         if shuffle_flag:
+
+            if not random_seed:
+                random_seed = 123
+            random.seed(random_seed)
+
             edge_index = data.edge_index
             x = data.x.tolist()
             y = data.y.tolist()
             index_list = [i for i in range(len(y))]
-            shuffle(index_list)
+            random.shuffle(index_list)
             shuffle_x = []
             shuffle_y = []
 

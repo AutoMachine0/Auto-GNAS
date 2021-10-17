@@ -6,18 +6,21 @@ class Planetoid(object):
                  data_name="cora",
                  train_splits=None,
                  val_splits=None,
-                 shuffle_flag=False):
+                 shuffle_flag=False,
+                 random_seed=None):
 
         self.data = self.__get_data(data_name,
                                     train_splits,
                                     val_splits,
-                                    shuffle_flag)
+                                    shuffle_flag,
+                                    random_seed)
 
     def __get_data(self,
                    data_name,
                    train_splits,
                    val_splits,
-                   shuffle_flag):
+                   shuffle_flag,
+                   random_seed):
 
         data_util_dict = data_util_class_getter()
 
@@ -27,7 +30,8 @@ class Planetoid(object):
                 data_util_obj.get_data(data_name,
                                        train_splits,
                                        val_splits,
-                                       shuffle_flag)
+                                       shuffle_flag,
+                                       random_seed)
                 return data_util_obj
 
         print("current version support default datasets:")
@@ -41,5 +45,5 @@ class Planetoid(object):
 
 
 if __name__=="__main__":
-    graph = Planetoid("ENZYMES", shuffle_flag=True).data
+    graph = Planetoid("ENZYMES", shuffle_flag=True, random_seed=555).data
     pass
