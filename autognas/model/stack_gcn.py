@@ -138,7 +138,7 @@ class StackGcn(object):
                                                              mode="train")
 
                 self.train_batch_id += 1
-                train_loss = self.loss(train_predict_y, train_y)/self.train_batch_size
+                train_loss = self.loss.function(train_predict_y, train_y)/self.train_batch_size
                 self.optimizer.zero_grad()
                 train_loss.backward()
                 self.optimizer.step()
@@ -178,7 +178,7 @@ class StackGcn(object):
                                                            mode="val")
                 self.val_batch_id += 1
 
-                val_loss = self.loss(val_predict_y, val_y)/self.val_batch_size
+                val_loss = self.loss.function(val_predict_y, val_y)/self.val_batch_size
 
                 batch_val_loss_list.append(val_loss.item())
                 val_predict_y_list.append(val_predict_y)
@@ -247,7 +247,7 @@ class StackGcn(object):
                                                         batch_test_x_index_list[self.test_batch_id],
                                                         mode="test")
             self.test_batch_id += 1
-            test_loss = self.loss(test_predict_y, test_y)/self.train_batch_size
+            test_loss = self.loss.function(test_predict_y, test_y)/self.train_batch_size
             test_predict_y_list.append(test_predict_y)
             test_y_list.append(test_y)
             test_loss_list.append(test_loss.item())
