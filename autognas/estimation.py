@@ -41,7 +41,12 @@ class Estimation(object):
 
         self.gnn_architecture = gnn_architecture
         self.data = data
-        self.gnn_type = gnn_parameter["gnn_type"]
+
+	if "gnn_type" in gnn_parameter["gnn_type"]
+           self.gnn_type = gnn_parameter["gnn_type"]
+        else:
+           self.gnn_type = "stack_gcn"
+
         self.gnn_parameter = gnn_parameter
 
     def get_performance(self):
