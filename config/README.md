@@ -6,7 +6,7 @@
 
 - **Warning:don't modify other parts of the template to avoid AutoGNAS failure!**
 
-```json
+```python
 [search_parameter]
 search_algorithm_type = user-defined search name       # necessary
 test_gnn_num = the final test model number             # optimal

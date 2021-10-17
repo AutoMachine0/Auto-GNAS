@@ -66,7 +66,7 @@ pip install scikit_learn==0.21.3
 
 Users can refer to the following easy cases to understand how to:
 - [*Define your graph data*](https://github.com/AutoMachine0/Auto-GNAS/blob/master/examples/graph_data_build/node_classification_graph_build.py)
-- [*Define your configuration file*](https://github.com/AutoMachine0/Auto-GNAS/tree/master/config/node_classification_config)
+- [*Define your configuration file*](https://github.com/AutoMachine0/Auto-GNAS/tree/master/config)
 - [*Implement node classification task*](https://github.com/AutoMachine0/Auto-GNAS/blob/master/examples/node_classification.py)
 - [*Implement graph classification task*](https://github.com/AutoMachine0/Auto-GNAS/blob/master/examples/graph_classification.py)
 
