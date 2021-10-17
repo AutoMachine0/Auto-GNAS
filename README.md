@@ -89,13 +89,15 @@ AutoGNAS is very friendly for users to implement customization, users can freely
 
 **3. GNN Training**
 
-- optimizer function
-- loss function
-- evaluator function
+- [optimizer function](https://github.com/AutoMachine0/Auto-GNAS/tree/master/autognas/model/optimizer_function)
+- [loss function](https://github.com/AutoMachine0/Auto-GNAS/tree/master/autognas/model/loss_function)
+- [evaluator function](https://github.com/AutoMachine0/Auto-GNAS/tree/master/autognas/model/evaluator_function)
 
-**4. Downstream Task Model**
+**4. [Downstream Task Model](https://github.com/AutoMachine0/Auto-GNAS/tree/master/autognas/model/downstream_task_model)**
 
 ## API for Parallel Estimation 
+Users can use the API to implement parallel evaluation capabilities for their own search algorithms
+
 ```python
 from autognas.parallel import ParallelOperater,ParallelConfig
 
@@ -115,7 +117,9 @@ gnn_architecture_list = UserCustomSearchAlgorithm()
 parallel_result = parallel_estimation.estimation(gnn_architecture_list)
 ```
 
-## API for GNAS
+## API for GNN Search 
+This is the top-level API of AutoGNAS, users can use the default search algorithm to achieve different graph tasks
+
 ```python
 
 import os
@@ -142,7 +146,9 @@ gnn_parameter = dict(config.items("gnn_parameter"))
 AutoModel(graph, search_parameter, gnn_parameter)
 ```
 
-## API for GNN 
+## API for GNN Training
+The API can help users realize the training and testing of GNN models for user-defined gnn architecture
+
 ```python
 from autognas.model.stack_gcn import StackGcn
 from autognas.datasets.planetoid import Planetoid
@@ -164,6 +170,7 @@ model.evaluate()
 ```
 
 ## Default Configuration
+
 **1. Search Space**
 
 | Architecture Component| Value |
