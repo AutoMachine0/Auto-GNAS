@@ -218,7 +218,7 @@ graph = Planetoid("cora").data
 # graph classification protein network: ENZYMES for your cofiguration
 graph = Planetoid(data_name="ENZYMES",train_splits=0.9, val_splits=0.05, shuffle_flag=True, random_seed=55).data 
 
-# node classification cite network:cora; citeseer; pubmed for default configuration
+# graph classification protein network: ENZYMES for default configuration
 graph = Planetoid("ENZYMES").data
 ```
    
