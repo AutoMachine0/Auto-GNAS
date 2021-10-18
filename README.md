@@ -1,10 +1,10 @@
 # Auto Graph Neural Architecture Search
 
-- AutoGNAS is a general parallel graph neural architecture search framework for different tasks on graph dataset.
+- Auto-GNAS is a general parallel graph neural architecture search framework for different tasks on graph dataset.
 
-- AutoGNAS is developed based on [*GraphPAS: Parallel Architecture Search for Graph Neural Networks*](https://dl.acm.org/doi/abs/10.1145/3404835.3463007),Jiamin Chen,Jianliang Gao,Yibo Chen,Babatounde Moctard Oloulade,Tengfei Lyu,Zhao Li,**SIGIR 2021**
+- Auto-GNAS is developed based on [*GraphPAS: Parallel Architecture Search for Graph Neural Networks*](https://dl.acm.org/doi/abs/10.1145/3404835.3463007),Jiamin Chen,Jianliang Gao,Yibo Chen,Babatounde Moctard Oloulade,Tengfei Lyu,Zhao Li,**SIGIR 2021**
 
-- AutoGNAS suports *Graph Convolutional Neural Network Architecture* design for node, link and graph embedding on current version. 
+- Auto-GNAS suports *Graph Convolutional Neural Network Architecture* design for node, link and graph embedding on current version. 
 
 - The illustration of graph convolutional neurall architecture search is as follows:
 <br>
@@ -15,14 +15,14 @@
 
 #### 1. Highly customizable
 
-  - AutoGNAS supports user-defined almost all module functions
+  - Auto-GNAS supports user-defined almost all module functions
 
 #### 2. Parallel estimation
-  - AutoGNAS provides an interface for user-defined search algorithms to easily achieve parallel evaluation capabilities based on CPU or GPU 
+  - Auto-GNAS provides an interface for user-defined search algorithms to easily achieve parallel evaluation capabilities based on CPU or GPU 
 
 #### 3. Multiple search algorithms
     
-   - AutoGNAS supports four different default search algorithms:
+   - Auto-GNAS supports four different default search algorithms:
      - [graphpas](https://dl.acm.org/doi/abs/10.1145/3404835.3463007)
      - [graphnas](https://arxiv.org/abs/1904.09981)
      - genetic search
@@ -72,7 +72,7 @@ Users can refer to the following easy cases to understand how to:
 
 
 ## User-defined
-AutoGNAS is very friendly for users to implement customization, users can freely define their own functional components as long as they follow the **specifications** and AutoGNAS will automatically load user-defined components. User can know the custom specification of each functional component in the following list, which is very simple. The list of definable components is as follows: 
+Auto-GNAS is very friendly for users to implement customization, users can freely define their own functional components as long as they follow the **specifications** and Auto-GNAS will automatically load user-defined components. User can know the custom specification of each functional component in the following list, which is very simple. The list of definable components is as follows: 
 
 **1. Search Space**
 
@@ -118,7 +118,7 @@ parallel_result = parallel_estimation.estimation(gnn_architecture_list)
 ```
 
 ## API for GNN Search 
-This is the top-level API of AutoGNAS, users can use the default search algorithm to achieve different graph tasks
+This is the top-level API of Auto-GNAS, users can use the default search algorithm to achieve different graph tasks
 
 ```python
 
@@ -218,7 +218,7 @@ graph = Planetoid("ENZYMES").data
    
 
 ## Citing
-If you think AutoGNAS is useful tool for you, please cite our paper, thank you for your support:
+If you think Auto-GNAS is useful tool for you, please cite our paper, thank you for your support:
 ```
 @inproceedings{chen2021graphpas,
   title={GraphPAS: Parallel Architecture Search for Graph Neural Networks},
