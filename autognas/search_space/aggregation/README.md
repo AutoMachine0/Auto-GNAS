@@ -1,6 +1,6 @@
 ## Aggregation function user-defined specification
 
-- Users only need to define their own aggregation function according to the following template in the **user-defined area** , and then put the user-defined script into this path: **autognas/search_space/aggregation/**. the AutoGNAS will automatically load it. 
+- Users only need to define their own aggregation function according to the following template in the **user-defined area** , and then put the user-defined script into this path: **autognas/search_space/aggregation/**. the Auto-GNAS will automatically load it. 
 
 - **Warning:don't modify other parts of the template to avoid automatic loading failure!**
 

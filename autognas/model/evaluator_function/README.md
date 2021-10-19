@@ -1,6 +1,6 @@
 ## Evaluator function user-defined specification
 
-- Users only need to define their own evaluator function according to the following template in the **user-defined area** , and then put the user-defined script into this path: **/autognas/model/evaluator_function/**. the AutoGNAS will automatically load it. 
+- Users only need to define their own evaluator function according to the following template in the **user-defined area** , and then put the user-defined script into this path: **/autognas/model/evaluator_function/**. the Auto-GNAS will automatically load it. 
 
 - **Warning:don't modify other parts of the template to avoid automatic loading failure!**
 

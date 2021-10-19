@@ -1,6 +1,6 @@
 ## Search algorithm user-defined specification
 
-- Users only need to define their own search algorithm according to the following template in the **user-defined area**, and then put the user-defined script into a file which the file name is the search algorthm name. Finally, put the file into this path: **autognas/search_algorithm/**. the AutoGNAS will automatically load it. 
+- Users only need to define their own search algorithm according to the following template in the **user-defined area**, and then put the user-defined script into a file which the file name is the search algorithm name. Finally, put the file into this path: **autognas/search_algorithm/**. the Auto-GNAS will automatically load it. 
 
 - **Warning:don't modify other parts of the template to avoid automatic loading failure!**
 ```python
