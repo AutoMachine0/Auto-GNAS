@@ -4,7 +4,7 @@
 
 - **Attention:in your ini script you need include necessary information that have been marked in the template**
 
-- **Warning:don't modify other parts of the template to avoid AutoGNAS failure!**
+- **Warning:don't modify other parts of the template to avoid Auto-GNAS failure!**
 
 ```python
 [search_parameter]
@@ -15,7 +15,7 @@ test_gnn_num = the final test model number             # optimal
 
 [gnn_parameter]
 gnn_type = stack_gcn                                   # optimal
-# training gnn type in AutoGNAS and AutoGNAS supports "stack gcn" in current version
+# training gnn type in Auto-GNAS and Auto-GNAS supports "stack gcn" in current version
 gnn_layers = 2                                         # optimal
 downstream_task_type = node_classification             # optimal
 train_batch_size = 1                                   # optimal
