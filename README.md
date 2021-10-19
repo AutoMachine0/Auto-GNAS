@@ -4,7 +4,7 @@
 
 - Auto-GNAS is developed based on [*GraphPAS: Parallel Architecture Search for Graph Neural Networks*](https://dl.acm.org/doi/abs/10.1145/3404835.3463007),Jiamin Chen,Jianliang Gao,Yibo Chen,Babatounde Moctard Oloulade,Tengfei Lyu,Zhao Li,**SIGIR 2021**
 
-- Auto-GNAS suports *Graph Convolutional Neural Network Architecture* design for node, link and graph embedding on current version. 
+- Auto-GNAS supports *Graph Convolutional Neural Network Architecture* design for node, link and graph embedding on current version. 
 
 - The illustration of graph convolutional neural architecture search is as follows:
 <br>
@@ -72,7 +72,7 @@ Users can refer to the following easy cases to understand how to:
 
 
 ## User-defined
-Auto-GNAS is very friendly for users to implement customization, users can freely define their own functional components as long as they follow the **specifications** and Auto-GNAS will automatically load user-defined components. User can know the custom specification of each functional component in the following list, which is very simple. The list of definable components is as follows: 
+Auto-GNAS is very friendly for users to implement customization, users can freely define their own functional components as long as they follow the **custom specification** and Auto-GNAS will automatically load user-defined components. Users can know the **custom specification** of each functional component in the following list, which is very simple. The list of definable components is as follows: 
 
 **1. Search Space**
 
@@ -194,7 +194,7 @@ model.evaluate()
 |:-:|:-:|
 | **Optimizer function**   |adam |
 | **loss function**       |nll_loss|
-| **evalutor function**    |accuracy / recall / f1 score / precision |
+| **evaluator function**    |accuracy / recall / f1 score / precision |
 
 
 
