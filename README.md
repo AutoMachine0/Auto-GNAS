@@ -82,7 +82,7 @@ Auto-GNAS is very friendly for users to implement customization, users can freel
 - [Hidden dimension](https://github.com/AutoMachine0/Auto-GNAS/tree/master/autognas/search_space/hidden_dimension)
 - [Activation](https://github.com/AutoMachine0/Auto-GNAS/tree/master/autognas/search_space/activation)
 - Layer number
-    - user can defined this parameter in the [ini configuration file](https://github.com/AutoMachine0/Auto-GNAS/blob/master/config/node_classification_config/graphpas.ini) at the gnn_parameter **gnn_layers** 
+    - user can defined this parameter in the [ini configuration file](https://github.com/AutoMachine0/Auto-GNAS/blob/master/config/node_classification_config/graphpas.ini) at the \[gnn_parameter] **gnn_layers** 
 
 **2. [Search Algorithm](https://github.com/AutoMachine0/Auto-GNAS/tree/master/autognas/search_algorithm)**
 
