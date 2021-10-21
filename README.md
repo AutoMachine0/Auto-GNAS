@@ -34,7 +34,7 @@
 
 **1. Python environment:** recommending using Conda package manager to install
 
-```json
+```python
 conda create -n autognas python=3.6
 source activate autognas
 pip install scipy==1.1.0
