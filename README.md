@@ -34,7 +34,7 @@
 
 **1. Python environment:** recommending using Conda package manager to install
 
-```js
+```python
 conda create -n autognas python=3.6
 source activate autognas
 pip install scipy==1.1.0
@@ -43,7 +43,7 @@ pip install numpy==1.15.4
 
 **2. Pytorch:**
 
-```js
+```python
 pip install torch==1.1.0 -f https://download.pytorch.org/whl/cu90/torch_stable.html
 pip install torch-scatter==1.2.0
 pip install torch-cluster==1.4.0
@@ -51,15 +51,15 @@ pip install torch-sparse==0.4.0
 ```
 
 **3. Pytorch Geometric:**
-```js
+```python
 pip install torch_geometric==1.2.1
 ```
 **4. Ray:**
-```js
+```python
 pip install ray==1.2.0
 ```
 **5. Scikit Learn:**
-```js
+```python
 pip install scikit_learn==0.21.3
 ```
 ## Quick start
