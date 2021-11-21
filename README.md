@@ -4,7 +4,7 @@
 
 - Auto-GNAS is developed based on [*GraphPAS: Parallel Architecture Search for Graph Neural Networks*](https://dl.acm.org/doi/abs/10.1145/3404835.3463007),Jiamin Chen,Jianliang Gao,Yibo Chen,Babatounde Moctard Oloulade,Tengfei Lyu,Zhao Li,**SIGIR 2021**
 
-- Auto-GNAS supports *Graph Convolutional Neural Network Architecture* design for node, link and graph embedding on current version. 
+- Auto-GNAS supports *Graph Convolutional Neural Network Architecture* design for node, graph embedding on different downstream tasks, such as node, graph classification and link prediction. 
 
 - The illustration of graph convolutional neural architecture search is as follows:
 <br>
@@ -15,7 +15,7 @@
 
 #### 1. Highly customizable
 
-  - Auto-GNAS supports user-defined almost all module functions
+  - Auto-GNAS supports user-defined almost all module functions easily.
 
 #### 2. Parallel estimation
   - Auto-GNAS provides an interface for user-defined search algorithms to easily achieve parallel evaluation capabilities based on CPU or GPU 
@@ -32,36 +32,37 @@
 
 - **Ensure you have installed CUDA 11.1 before installing other packages**
 
-**1. Python environment:** recommending using Conda package manager to install
+**1. Nvidia and CUDA 11.1:**
 
 ```python
-conda create -n autognas python=3.6
+(Nvidia)    https://www.nvidia.cn/Download/index.aspx?lang=cn
+(CUDA 11.1) https://developer.nvidia.com/search?page=1&sort=relevance&term=cuda%20toolkit%2011.0
+
+```
+
+**2. Python environment:** recommending using Conda package manager to install
+
+```python
+conda create -n autognas python=3.9
 source activate autognas
-pip install scipy==1.1.0
-pip install numpy==1.15.4
 ```
 
-**2. Pytorch:**
+**3. Pytorch:** execute the following command in your conda env autognas
 
 ```python
-pip install torch==1.1.0 -f https://download.pytorch.org/whl/cu90/torch_stable.html
-pip install torch-scatter==1.2.0
-pip install torch-cluster==1.4.0
-pip install torch-sparse==0.4.0
+pip3 install torch==1.8.2+cu111 torchvision==0.9.2+cu111 torchaudio==0.8.2 -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html
 ```
 
-**3. Pytorch Geometric:**
+**4. Pytorch Geometric:** execute the following command in your conda env autognas
 ```python
-pip install torch_geometric==1.2.1
+pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.8.0+cu111.html
 ```
-**4. Ray:**
+**5. Ray:** execute the following command in your conda env autognas
 ```python
-pip install ray==1.2.0
+pip install ray
 ```
-**5. Scikit Learn:**
-```python
-pip install scikit_learn==0.21.3
-```
+
+
 ## Quick start
 
 Users can refer to the following easy cases to understand how to:
@@ -69,6 +70,7 @@ Users can refer to the following easy cases to understand how to:
 - [*Define your configuration file*](https://github.com/AutoMachine0/Auto-GNAS/tree/master/config)
 - [*Implement node classification task*](https://github.com/AutoMachine0/Auto-GNAS/blob/master/examples/node_classification.py)
 - [*Implement graph classification task*](https://github.com/AutoMachine0/Auto-GNAS/blob/master/examples/graph_classification.py)
+- [*Implement link prediction task*](https://github.com/AutoMachine0/Auto-GNAS/blob/master/examples/link_prediction.py)
 
 
 ## User-defined
@@ -176,7 +178,7 @@ model.evaluate()
 | Architecture Component| Value |
 |:-:|:-:|
 | **Attention**       | gat / gcn / cos / const / sym-gat / linear / gene-linear|
-| **Aggregation**      |mean / max / sum |
+| **Aggregation**      |mean / max / sum / min /softmax_sum |
 | **Multi-head number** | 1 / 2 / 4 / 6 / 8|
 | **Hidden Dimension**  | 8 / 16 / 32 / 64 / 128 / 256|
 | **Activation**      | tanh / sigmoid / relu / linear / relu6 / elu / leaky_relu / softplus|
@@ -193,8 +195,8 @@ model.evaluate()
 | Name| Value |
 |:-:|:-:|
 | **Optimizer function**   |adam |
-| **loss function**       |nll_loss|
-| **evaluator function**    |accuracy / recall / f1 score / precision |
+| **loss function**       |nll_loss / binary_cross_entropy / binary_cross_entropy_with_logits / cross_entropy_loss |
+| **evaluator function**    |accuracy / recall / f1 score / precision / roc_auc_score |
 
 
 
@@ -202,6 +204,7 @@ model.evaluate()
 
 - [node classification](https://github.com/AutoMachine0/Auto-GNAS/blob/master/autognas/model/downstream_task_model/node_classification.py)
 - [graph classification](https://github.com/AutoMachine0/Auto-GNAS/blob/master/autognas/model/downstream_task_model/graph_classification.py)
+- [link prediction](https://github.com/AutoMachine0/Auto-GNAS/blob/master/autognas/model/downstream_task_model/link_prediction.py)
 
 
 **5. Datasets**
@@ -209,17 +212,23 @@ model.evaluate()
 
 from autognas.datasets.planetoid import Planetoid
 
-# node classification cite network:cora; citeseer; pubmed for your configuration
-graph = Planetoid(data_name="cora",train_splits=0.9, val_splits=0.05, shuffle_flag=True, random_seed=123).data 
+# node classification:cora; citeseer; pubmed for your configuration
+graph = Planetoid(data_name="cora",train_splits=0.5, val_splits=0.3, shuffle_flag=True, random_seed=123).data 
 
-# node classification cite network:cora; citeseer; pubmed for default configuration
+# node classification:cora; citeseer; pubmed for default configuration
 graph = Planetoid("cora").data
 
-# graph classification protein network: ENZYMES for your configuration
-graph = Planetoid(data_name="ENZYMES",train_splits=0.9, val_splits=0.05, shuffle_flag=True, random_seed=55).data 
+# graph classification: AIDS; BZR; COX2; DHFR; MUTAG; PROTEINS for your configuration
+graph = Planetoid(data_name="AIDS",train_splits=0.6, val_splits=0.2, shuffle_flag=True, random_seed=55).data 
 
-# graph classification protein network: ENZYMES for default configuration
-graph = Planetoid("ENZYMES").data
+# graph classification: AIDS; BZR; COX2; DHFR; MUTAG; PROTEINS for default configuration
+graph = Planetoid("ADIS").data
+
+# link prediction: cora_lp; citeseer_lp; pubmed_lp for your configuration
+graph = Planetoid(data_name="cora_lp",train_splits=0.6, val_splits=0.2, shuffle_flag=True, random_seed=55).data 
+
+# graph classification protein network: cora_lp; citeseer_lp; pubmed_lp for default configuration
+graph = Planetoid("ADIS").data
 ```
    
 
