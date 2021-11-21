@@ -30,7 +30,7 @@
 
 ## Installing
 
-- **Ensure you have installed CUDA 9.0 before installing other packages**
+- **Ensure you have installed CUDA 11.1 before installing other packages**
 
 **1. Python environment:** recommending using Conda package manager to install
 
