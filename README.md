@@ -43,7 +43,7 @@
 **2. Python environment:** recommending using Conda package manager to install
 
 ```python
-conda create -n autognas python=3.9
+conda create -n autognas python=3.7
 source activate autognas
 ```
 
