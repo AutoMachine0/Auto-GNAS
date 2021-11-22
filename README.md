@@ -227,7 +227,7 @@ graph = Planetoid("ADIS").data
 # link prediction: cora_lp; citeseer_lp; pubmed_lp for your configuration
 graph = Planetoid(data_name="cora_lp",train_splits=0.6, val_splits=0.2, shuffle_flag=True, random_seed=55).data 
 
-# graph classification protein network: cora_lp; citeseer_lp; pubmed_lp for default configuration
+# link prediction: cora_lp; citeseer_lp; pubmed_lp for default configuration
 graph = Planetoid("ADIS").data
 ```
    
