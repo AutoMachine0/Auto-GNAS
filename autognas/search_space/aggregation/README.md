@@ -10,7 +10,7 @@ import torch.nn
 
 class Aggregation(torch.nn.Module):
     """
-   Realizing custum aggregation manner for the source_node_representation_with_coefficient
+   Realizing user-defined aggregation manner for the source_node_representation_with_coefficient
 
    Args:
        source_node_representation_with_coefficient:tensor
