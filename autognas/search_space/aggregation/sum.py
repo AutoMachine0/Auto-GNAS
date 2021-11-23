@@ -1,13 +1,11 @@
 import torch.nn
 from torch_scatter import scatter_add
+
 class Aggregation(torch.nn.Module):
     """
    Realizing sum aggregation manner for the source_node_representation_with_coefficient
-   by default PYG sum pooling function
 
    Args:
-       heads: int
-          the number of multi heads
        source_node_representation_with_coefficient:tensor
           the source node representation matrix with attention coefficient
            source_node_representation_with_coefficient = attention_coefficient * x_j

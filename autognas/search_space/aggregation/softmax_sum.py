@@ -1,14 +1,12 @@
 import torch.nn
 from torch_scatter import scatter_softmax
 from torch_scatter import scatter_add
+
 class Aggregation(torch.nn.Module):
     """
-   Realizing sum aggregation manner for the source_node_representation_with_coefficient
-   by default PYG sum pooling function
+   Realizing softmax sum aggregation manner for the source_node_representation_with_coefficient
 
    Args:
-       heads: int
-          the number of multi heads
        source_node_representation_with_coefficient:tensor
           the source node representation matrix with attention coefficient
            source_node_representation_with_coefficient = attention_coefficient * x_j
@@ -17,9 +15,10 @@ class Aggregation(torch.nn.Module):
           and target node number, edge_index = [edge_index_j,edge_index_i]
 
    Returns:
-       node_representation: none
+       node_representation_agg_based_on_edge_target: tensor
           the node representation after sum aggregating
    """
+
 
     def __init__(self):
         super(Aggregation, self).__init__()
