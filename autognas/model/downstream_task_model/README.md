@@ -1,4 +1,4 @@
-## downstream task model user-defined specification
+## Downstream Task Model user-defined specification
 
 - Users only need to define their own downstream task model according to the following template in the **user-defined area** , and then put the user-defined script into this path: **autognas/model/downstream_task_model**. the Auto-GNAS will automatically load it. 
 
