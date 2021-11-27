@@ -1,48 +1,60 @@
-## Attention function user-defined specification
 
-- Users only need to define their own attention function according to the following template in the **user-defined area** , and then put the user-defined script into this path: **autognas/search_space/attention/**. the AutoGNAS will automatically load it. 
+## Search Algorithm user-defined specification
+
+- Users only need to define their own search algorithm according to the following template in the **user-defined area** , and then put the user-defined script into a file, and file name is your search algorithm name. putting this file into **autognas/search_algorithm/**. the Auto-GNAS will automatically load it. 
 
 - **Warning:don't modify other parts of the template to avoid automatic loading failure!**
 
 ```python
-import torch
+
+from autognas.parallel import ParallelOperater, ParallelConfig
 # import what you need to import python package
 
-class Attention(torch.nn.Module):
-    """
-    Computing the attention correlation coefficient
-    for each node of input graph data set
-    Args:
-        heads: int
-           the number of multi heads
-        output_dim: int
-           the transformer dimension of input in this gnn layer
-        x_i: tenser
-           the extended node feature matrix based on edge_index_i
-           the edge_index_i is the target node number list
-        x_j: tensor
-           the extended node feature matrix based on edge_index_j
-           the edge_index_j is the source node number list
-        edge_index: tensor
-           the corresponding relationship between source node number
-           and target node number, edge_index = [edge_index_j,edge_index_i]
-        num_nodes: int
-           the number of node in the input graph data
-    Returns:
-        attention_coefficient: tensor
-           the gat attention correlation coefficient for x_j node feature matrix
-    """
+class UserDefinedSearch(object):
 
-    def __init__(self, heads, output_dim):
-
-        super(Attention, self).__init__()
+    def __init__(self,search_space,user_defined_parameter):
+        
+        # get seach space component dict {component:value}
+        self.search_space = search_space.space_getter()
+        # get stack gnn architecture list 
+        # ['attention','aggregation','multi_heads', 'hidden_dimension','activation']
+        self.stack_gcn_architecture = search_space.stack_gcn_architecture
+        # initialize the gnn_architecture_list
+        self.gnn_architecture_list = []
         
         # User-defined  area
-        
-    def function(self, x_i, x_j, edge_index, num_nodes):
-        
-        # User-defined area
 
-        return attention_coefficient
+    def search(self):
+
+        # User-defined  area
+
+        return self.gnn_architecture_list
+
+class Search(object):
+
+    def __init__(self,
+                 data,
+                 search_parameter,
+                 gnn_parameter,
+                 search_space):
+
+        self.data = data                         # graph data object
+        self.search_parameter = search_parameter # search parameter dict
+        self.gnn_parameter = gnn_parameter       # gnn train/test parameter dict
+        self.search_space = search_space         # search space component dict, stack gnn architecture list
+
+    def search_operator(self):
+        
+        # User-defined  area
+
+        # Parallel Operator object initialize
+        parallel_estimation = ParallelOperater(self.data, self.gnn_parameter)
+        # initialize UserDefinedSearch object
+        searcher = self.UserDefinedSearch(search_space,user_defined_parameter)
+        # get sampled gnn architectures list from UserDefinedSearch 
+        gnn_architecture_list = searcher.search()
+        # get parallel estimation results for sampled gnn architectures
+        result = parallel_estimation.estimation(gnn_architecture_list)
+
+       
 ```
-

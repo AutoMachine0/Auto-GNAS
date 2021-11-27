@@ -17,13 +17,14 @@ class DownstreamTask(torch.nn.Module):
             4.val_x, 5.val_y, 6.val_edge_index
             7.test_x, 8.test_y, 9.test_edge_index
             10. num_features, 11.num_labels, 12.data_name
-        node_embedding: tensor
+        node_embedding_matrix: tensor
             the output node embedding matrix of stack gcn model
+        batch_x_index: tensor
+            the node embedding matrix index for each graph
 
     Returns:
         predict_y: tensor
-            the output tensor of mlp for transductive node
-            classification
+            the output tensor of predicting
     """
 
     def __init__(self, gnn_embedding_dim, graph_data):
@@ -34,7 +35,7 @@ class DownstreamTask(torch.nn.Module):
 
     def forward(self,
                 node_embedding_matrix,
-                batch_train_x_index,
+                batch_x_index,
                 mode="train"):
 
         logits = self.mlp(node_embedding_matrix)
