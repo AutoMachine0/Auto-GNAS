@@ -1,15 +1,19 @@
 # Automatic Graph Neural Architecture Search
 
-- Auto-GNAS is a general parallel graph neural architecture search framework for different tasks on graph dataset.
+- Auto-GNAS is a general parallel graph neural architecture search framework for researchers and developers to achieve different tasks on graph.
 
-- Auto-GNAS is developed based on [*GraphPAS: Parallel Architecture Search for Graph Neural Networks*](https://github.com/AutoMachine0/Auto-GNAS/blob/master/paper/GraphPAS:%20Parallel%20Architecture%20Search%20for%20Graph%20Neural%0ANetworks.pdf),Jiamin Chen,Jianliang Gao,Yibo Chen,Babatounde Moctard Oloulade,Tengfei Lyu,Zhao Li,**SIGIR 2021**
+- The framework of Auto-GNAS is as follows:
 
-- Auto-GNAS supports *Graph Convolutional Neural Network Architecture* design for node, graph embedding on different downstream tasks, such as node, graph classification and link prediction. 
-
-- The illustration of graph convolutional neural architecture search is as follows:
 <br>
-<div align=center> <img src="pic/GNAS.png" height="70%" width="70%"/> </div>
+<div align=left> <img src="pic/Auto-GNAS_framework.png" height="100%" width="85%"/> </div>
 
+
+## News
+
+- 2022.02.10 Our work [*Auto-GNAS: A Parallel Graph Neural Architecture Search Framework*](https://ieeexplore.ieee.org/document/9714826) is accepted by **TPDS 2022**.
+
+
+- 2021.04.15 Our work [*GraphPAS: Parallel Architecture Search for Graph Neural Networks*](https://arxiv.org/abs/2112.03461) is accepted by **SIGIR 2021**.
 
 ## Characters
 
@@ -18,15 +22,8 @@
   - Auto-GNAS supports user-defined almost all module functions easily.
 
 #### 2. Parallel estimation
-  - Auto-GNAS provides an interface for user-defined search algorithms to easily achieve parallel evaluation capabilities based on CPU or GPU 
-
-#### 3. Multiple search algorithms
-    
-   - Auto-GNAS supports four different default search algorithms:
-     - [graphpas](https://github.com/AutoMachine0/Auto-GNAS/blob/master/paper/GraphPAS:%20Parallel%20Architecture%20Search%20for%20Graph%20Neural%0ANetworks.pdf)
-     - [graphnas](https://arxiv.org/abs/1904.09981)
-     - genetic search
-     - random search
+  - Auto-GNAS provides an interface for user-defined search algorithms to easily achieve parallel evaluation capabilities based on CPU or GPU. 
+  
 
 ## Installing
 
@@ -234,6 +231,19 @@ graph = Planetoid("ADIS").data
 
 ## Citing
 If you think Auto-GNAS is useful tool for you, please cite our paper, thank you for your support:
+
+```
+@ARTICLE{9714826,
+  author={Chen, Jiamin and Gao, Jianliang and Chen, Yibo and Oloulade, Babatounde MOCTARD and Lyu, Tengfei and Li, Zhao},
+  journal={IEEE Transactions on Parallel and Distributed Systems}, 
+  title={Auto-GNAS: A Parallel Graph Neural Architecture Search Framework}, 
+  year={2022},
+  volume={},
+  number={},
+  pages={1-1},
+  doi={10.1109/TPDS.2022.3151895}}
+```
+
 ```
 @inproceedings{chen2021graphpas,
   title={GraphPAS: Parallel Architecture Search for Graph Neural Networks},
