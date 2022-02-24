@@ -5,7 +5,7 @@
 - The framework of Auto-GNAS is as follows:
 
 <br>
-<div align=left> <img src="pic/Auto-GNAS_framework.png" height="100%" width="85%"/> </div>
+<div align=center> <img src="pic/Auto-GNAS_framework.png" height="100%" width="85%"/> </div>
 
 
 ## News
