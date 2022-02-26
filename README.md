@@ -13,7 +13,7 @@
 - 2022.02.10 Our work [*Auto-GNAS: A Parallel Graph Neural Architecture Search Framework*](https://ieeexplore.ieee.org/document/9714826) is accepted by **TPDS 2022**.
 
 
-- 2021.04.15 Our work [*GraphPAS: Parallel Architecture Search for Graph Neural Networks*](https://arxiv.org/abs/2112.03461) is accepted by **SIGIR 2021**.
+- 2021.04.15 Our work [*GraphPAS: Parallel Architecture Search for Graph Neural Networks*](https://dl.acm.org/doi/abs/10.1145/3404835.3463007) is accepted by **SIGIR 2021**.
 
 ## Characters
 
