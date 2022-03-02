@@ -8,7 +8,7 @@ from autognas.parallel import ParallelOperater, \
 from autognas.datasets.planetoid import Planetoid # for unit test
 from autognas.search_space.search_space_config import SearchSpace  # for unit test
 
-class GraphpasSearch(object):
+class GraphPASSearch(object):
     """
     Realizing population random initializing and genetic search process,
     the genetic search process includes:
@@ -23,7 +23,7 @@ class GraphpasSearch(object):
             confirming one gnn architecture genetic list mutation number
             in the mutation process for each searcher.
         initial_num: int
-            confirming the random initialized population scale for one searcher.
+            confirming the scale of initialized population.
         search_space: SearchSpace class
             preparing the search space dict and the stack gcn architecture.
 
@@ -37,21 +37,13 @@ class GraphpasSearch(object):
     def __init__(self,
                  sharing_num,
                  mutation_num,
-                 initial_num,
                  search_space):
 
         self.sharing_num = sharing_num
         self.mutation_num = mutation_num
-        self.initial_num = initial_num
-
-        self.initial_gnn_architecture_embedding_list = []
-        self.initial_gnn_architecture_list = []
-        self.initial_gnn_architecture_performance = []
 
         self.search_space = search_space.space_getter()
         self.stack_gcn_architecture = search_space.stack_gcn_architecture
-
-        self.random_initialize_population()
 
     def search(self,
                total_pop,
@@ -77,20 +69,6 @@ class GraphpasSearch(object):
 
         total_pop = total_pop + children
         return children, total_pop
-
-    def random_initialize_population(self):
-
-        print(35*"=", "population initializing based on random strategy", 35*"=")
-
-        while len(self.initial_gnn_architecture_embedding_list) < self.initial_num:
-            gnn_architecture_embedding = utils.random_generate_gnn_architecture_embedding(self.search_space,
-                                                                                          self.stack_gcn_architecture)
-            gnn_architecture = utils.gnn_architecture_embedding_decoder(gnn_architecture_embedding,
-                                                                        self.search_space,
-                                                                        self.stack_gcn_architecture)
-            # gnn architecture genetic embedding based on number
-            self.initial_gnn_architecture_embedding_list .append(gnn_architecture_embedding)
-            self.initial_gnn_architecture_list.append(gnn_architecture)
 
     def selection(self,
                   population,
@@ -159,6 +137,34 @@ class GraphpasSearch(object):
         print("after sharing_performance:\n", sharing_performance)
         return sharing_population, sharing_performance
 
+class PopulationInitialization(object):
+
+    def __init__(self,
+                 initial_num,
+                 search_space):
+
+        self.initial_num = initial_num
+        self.initial_gnn_architecture_embedding_list = []
+        self.initial_gnn_architecture_list = []
+        self.search_space = search_space.space_getter()
+        self.stack_gcn_architecture = search_space.stack_gcn_architecture
+
+    def initialize_random(self):
+
+        print(35*"=", "population initializing based on random strategy", 35*"=")
+
+        while len(self.initial_gnn_architecture_embedding_list) < self.initial_num:
+            gnn_architecture_embedding = utils.random_generate_gnn_architecture_embedding(self.search_space,
+                                                                                          self.stack_gcn_architecture)
+            gnn_architecture = utils.gnn_architecture_embedding_decoder(gnn_architecture_embedding,
+                                                                        self.search_space,
+                                                                        self.stack_gcn_architecture)
+            # gnn architecture genetic embedding based on number
+            self.initial_gnn_architecture_embedding_list .append(gnn_architecture_embedding)
+            self.initial_gnn_architecture_list.append(gnn_architecture)
+
+        return self.initial_gnn_architecture_embedding_list, self.initial_gnn_architecture_list
+
 class Search(object):
     """
     Graphpas search algorithm search logic class
@@ -193,30 +199,22 @@ class Search(object):
     def search_operator(self):
 
         print(35 * "=", "graphpas search start", 35 * "=")
-        time_initial = time.time()
+
+        # searcher initializing
         searcher_list = []
         for index in range(int(self.search_parameter["parallel_num"])):
-            searcher = GraphpasSearch(sharing_num=int(self.search_parameter["sharing_num"]),
+            searcher = GraphPASSearch(sharing_num=int(self.search_parameter["sharing_num"]),
                                       mutation_num=eval(self.search_parameter["mutation_num"])[index],
-                                      initial_num=int(self.search_parameter["initial_num"]),
                                       search_space=self.search_space)
             searcher_list.append(searcher)
 
-        # fitness calculate / fitness merge
-        total_pop = []
-        total_performance = []
-        for searcher in searcher_list:
-            gnn_architecture_list = searcher.initial_gnn_architecture_list
-
-            # parallel estimation
-            result = self.parallel_estimation.estimation(gnn_architecture_list)
-
-            for performance in result:
-                searcher.initial_gnn_architecture_performance += [performance]
-
-            total_pop = total_pop + searcher.initial_gnn_architecture_embedding_list
-            total_performance = total_performance + searcher.initial_gnn_architecture_performance
-
+        # population initializing and fitness calculating
+        time_initial = time.time()
+        population_initialization = PopulationInitialization(int(self.search_parameter["initial_num"]), self.search_space)
+        initial_gnn_architecture_embedding_list, initial_gnn_architecture_list = population_initialization.initialize_random()
+        result = self.parallel_estimation.estimation(initial_gnn_architecture_list)
+        total_pop = initial_gnn_architecture_embedding_list
+        total_performance = result
         time_initial = time.time() - time_initial
 
         # initial gnn architecture time cost record
@@ -233,7 +231,8 @@ class Search(object):
                                                                            top_k=self.search_parameter["sharing_num"])
         # mutation select probability vector calculate
         sharing_population_temp = sharing_population.copy()
-        mutation_selection_probability = utils.mutation_selection_probability(sharing_population_temp, self.search_space.stack_gcn_architecture)
+        mutation_selection_probability = utils.mutation_selection_probability(sharing_population_temp,
+                                                                              self.search_space.stack_gcn_architecture)
         print(35 * "=", "mutation select probability vector:", 35 * "=")
         print(mutation_selection_probability)
 
@@ -322,7 +321,7 @@ if __name__=="__main__":
 
     search_parameter = {"parallel_num": "2",
                         "mutation_num": "[1, 2]",
-                        "initial_num": "10",
+                        "initial_num": "5",
                         "sharing_num": "5",
                         "search_epoch": "1"}
 
