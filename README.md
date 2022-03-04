@@ -234,7 +234,7 @@ graph = Planetoid("ADIS").data
 - *Data mini batch operation are independent from stack_gcn.py——>update stack_gcn.py*
 
 ### Function
-- *Downstream task module support additional feature from original data for modeling  in addition to node embedding feature——>update stack_gcn.py*
+- *Reconstruct input graph data class standard for autognas, require the input graph data class that have done mini-batch data pre-processing*
 
 ## Citing
 If you think Auto-GNAS is useful tool for you, please cite our paper, thank you for your support:
