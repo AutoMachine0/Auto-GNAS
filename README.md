@@ -232,6 +232,8 @@ graph = Planetoid("ADIS").data
 
 ### Efficiency 
 - *Data mini batch operation are independent from stack_gcn.py——>update stack_gcn.py*
+
+### Function
 - *Downstream task module support additional feature from original data for modeling  in addition to embedding feature——>update stack_gcn.py*
 
 ## Citing
