@@ -25,7 +25,7 @@
   - Auto-GNAS provides an interface for user-defined search algorithms to easily achieve parallel evaluation capabilities based on CPU or GPU. 
   
 
-## Installing
+## Installing For Ubuntu
 
 - **Ensure you have installed CUDA 11.1 before installing other packages**
 
