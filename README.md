@@ -1,6 +1,6 @@
 # Automatic Graph Neural Architecture Search
 
-- Auto-GNAS is a general graph neural architecture search framework for researchers and developers to achieve different tasks on graph.
+- Auto-GNAS is a general parallel graph neural architecture search framework for researchers and developers to achieve different tasks on graph.
 
 - The framework of Auto-GNAS is as follows:
 
