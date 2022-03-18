@@ -7,31 +7,42 @@ class Planetoid(object):
                  train_splits=None,
                  val_splits=None,
                  shuffle_flag=False,
-                 random_seed=None):
+                 random_seed=None,
+                 train_batch_size=1,
+                 val_batch_size=1,
+                 test_batch_size=1):
 
         self.data = self.__get_data(data_name,
                                     train_splits,
                                     val_splits,
                                     shuffle_flag,
-                                    random_seed)
+                                    random_seed,
+                                    train_batch_size,
+                                    val_batch_size,
+                                    test_batch_size)
 
     def __get_data(self,
                    data_name,
                    train_splits,
                    val_splits,
                    shuffle_flag,
-                   random_seed):
+                   random_seed,
+                   train_batch_size,
+                   val_batch_size,
+                   test_batch_size):
 
         data_util_dict = data_util_class_getter()
 
         for data_util_obj, name in data_util_dict.items():
-
             if data_name in name:
                 data_util_obj.get_data(data_name,
                                        train_splits,
                                        val_splits,
                                        shuffle_flag,
-                                       random_seed)
+                                       random_seed,
+                                       train_batch_size,
+                                       val_batch_size,
+                                       test_batch_size)
                 return data_util_obj
 
         print("current version support default datasets:")

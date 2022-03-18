@@ -231,7 +231,7 @@ graph = Planetoid("ADIS").data
 ## Future Updating
 
 ### Efficiency 
-- *Data mini batch operation are independent from stack_gcn.py——>update stack_gcn.py*
+- *Data mini batch operation is decoupled from estimation process* *&radic;*
 
 ### Function
 - *Reconstruct input graph data class standard for autognas, require the input graph data class that have done mini-batch data pre-processing*

@@ -1,5 +1,6 @@
 import os
 import torch
+from autognas.util import Batch
 from torch_geometric.datasets import TUDataset
 
 class DATA(object):
@@ -12,7 +13,10 @@ class DATA(object):
                  train_splits=None,
                  val_splits=None,
                  shuffle_flag=False,
-                 random_seed=123):
+                 random_seed=123,
+                 train_batch_size=1,
+                 val_batch_size=1,
+                 test_batch_size=1):
 
         if train_splits == None or val_splits == None:
             train_splits = 0.8
@@ -44,6 +48,30 @@ class DATA(object):
         self.test_x = self.data_x_split(data_set, val_index, len_data_set)
         self.test_y = self.data_y_split(data_set, val_index, len_data_set)
         self.test_edge_index = self.data_edge_split(data_set, val_index, len_data_set)
+
+        self.batch_train_x_list, \
+        self.batch_train_edge_index_list, \
+        self.batch_train_y_list, \
+        self.batch_train_x_index_list = Batch(self.train_x,
+                                              self.train_edge_index,
+                                              self.train_y,
+                                              train_batch_size).data
+
+        self.batch_val_x_list, \
+        self.batch_val_edge_index_list, \
+        self.batch_val_y_list, \
+        self.batch_val_x_index_list = Batch(self.val_x,
+                                            self.val_edge_index,
+                                            self.val_y,
+                                            val_batch_size).data
+
+        self.batch_test_x_list, \
+        self.batch_test_edge_index_list, \
+        self.batch_test_y_list, \
+        self.batch_test_x_index_list = Batch(self.test_x,
+                                             self.test_edge_index,
+                                             self.test_y,
+                                             test_batch_size).data
 
         self.num_features = data_set.num_node_features
         self.num_labels = data_set.num_classes

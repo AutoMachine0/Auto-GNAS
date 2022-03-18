@@ -14,10 +14,21 @@ class Estimation(object):
             ['gcn', 'sum',  1, 64, 'tanh', 'gcn', 'sum', 1, 64, 'tanh']
         data: graph data object
             the target graph data object including required attributes:
-            1.train_x, 2.train_y, 3.train_edge_index
-            4.val_x, 5.val_y, 6.val_edge_index
-            7.test_x, 8.test_y, 9.test_edge_index
-            10. num_features, 11.num_labels, 12.data_name
+            1.batch_train_x_list
+            2.batch_train_edge_index_list
+            3.batch_train_y_list
+            4.batch_train_x_index_list
+            5.batch_val_x_list
+            6.batch_val_edge_index_list
+            7.batch_val_y_list
+            8.batch_val_x_index_list
+            9.batch_test_x_list
+            10.batch_test_edge_index_list
+            11.batch_test_y_list
+            12.batch_test_x_index_list
+            13. num_features
+            14.num_labels
+            15.data_name
         gnn_parameter: dict
             the gnn model training validating testing config dict
 
@@ -54,9 +65,6 @@ class Estimation(object):
         if self.gnn_type == "stack_gcn":
 
             downstream_task_type = "node_classification"
-            train_batch_size = 1
-            val_batch_size = 1
-            test_batch_size = 1
             gnn_drop_out = 0.6
             train_epoch = 100
             train_epoch_test = 100
@@ -71,12 +79,6 @@ class Estimation(object):
 
             if "downstream_task_type" in self.gnn_parameter:
                 downstream_task_type = self.gnn_parameter["downstream_task_type"]
-            if "train_batch_size" in self.gnn_parameter:
-                train_batch_size = eval(self.gnn_parameter["train_batch_size"])
-            if "val_batch_size" in self.gnn_parameter:
-                val_batch_size = eval(self.gnn_parameter["val_batch_size"])
-            if "test_batch_size" in self.gnn_parameter:
-                test_batch_size = eval(self.gnn_parameter["test_batch_size"])
             if "gnn_drop_out" in self.gnn_parameter:
                 gnn_drop_out = eval(self.gnn_parameter["gnn_drop_out"])
             if "train_epoch" in self.gnn_parameter:
@@ -103,18 +105,6 @@ class Estimation(object):
             if not isinstance(downstream_task_type, str):
                 raise Exception("downstream_task_type Class Wrong, require str Class ", "but input Class: ",
                                 type(downstream_task_type))
-
-            if not isinstance(train_batch_size, int):
-                raise Exception("train_batch_size Class Wrong, require int Class ", "but input Class: ",
-                                type(train_batch_size))
-
-            if not isinstance(val_batch_size, int):
-                raise Exception("val_batch_size Class Wrong, require int Class ", "but input Class: ",
-                                type(val_batch_size))
-
-            if not isinstance(test_batch_size, int):
-                raise Exception("test_batch_size Class Wrong, require int Class ", "but input Class: ",
-                                type(test_batch_size))
 
             if not isinstance(gnn_drop_out, float):
                 raise Exception("gnn_drop_out Class Wrong, require float Class ", "but input Class: ",
@@ -162,9 +152,6 @@ class Estimation(object):
 
             model = StackGcn(graph_data=self.data,
                              downstream_task_type=downstream_task_type,
-                             train_batch_size=train_batch_size,
-                             val_batch_size=val_batch_size,
-                             test_batch_size=test_batch_size,
                              gnn_architecture=self.gnn_architecture,
                              gnn_drop_out=gnn_drop_out,
                              train_epoch=train_epoch,
@@ -190,9 +177,6 @@ class Estimation(object):
         if self.gnn_type == "stack_gcn":
 
             downstream_task_type = "node_classification"
-            train_batch_size = 1
-            val_batch_size = 1
-            test_batch_size = 1
             gnn_drop_out = 0.6
             train_epoch = 100
             train_epoch_test = 100
@@ -207,12 +191,6 @@ class Estimation(object):
 
             if "downstream_task_type" in self.gnn_parameter:
                 downstream_task_type = self.gnn_parameter["downstream_task_type"]
-            if "train_batch_size" in self.gnn_parameter:
-                train_batch_size = eval(self.gnn_parameter["train_batch_size"])
-            if "val_batch_size" in self.gnn_parameter:
-                val_batch_size = eval(self.gnn_parameter["val_batch_size"])
-            if "test_batch_size" in self.gnn_parameter:
-                test_batch_size = eval(self.gnn_parameter["test_batch_size"])
             if "gnn_drop_out" in self.gnn_parameter:
                 gnn_drop_out = eval(self.gnn_parameter["gnn_drop_out"])
             if "train_epoch" in self.gnn_parameter:
@@ -239,18 +217,6 @@ class Estimation(object):
             if not isinstance(downstream_task_type, str):
                 raise Exception("downstream_task_type Class Wrong, require str Class ", "but input Class: ",
                                 type(downstream_task_type))
-
-            if not isinstance(train_batch_size, int):
-                raise Exception("train_batch_size Class Wrong, require int Class ", "but input Class: ",
-                                type(train_batch_size))
-
-            if not isinstance(val_batch_size, int):
-                raise Exception("val_batch_size Class Wrong, require int Class ", "but input Class: ",
-                                type(val_batch_size))
-
-            if not isinstance(test_batch_size, int):
-                raise Exception("test_batch_size Class Wrong, require int Class ", "but input Class: ",
-                                type(test_batch_size))
 
             if not isinstance(gnn_drop_out, float):
                 raise Exception("gnn_drop_out Class Wrong, require float Class ", "but input Class: ",
@@ -298,9 +264,6 @@ class Estimation(object):
 
             model = StackGcn(graph_data=self.data,
                              downstream_task_type=downstream_task_type,
-                             train_batch_size=train_batch_size,
-                             val_batch_size=val_batch_size,
-                             test_batch_size=test_batch_size,
                              gnn_architecture=self.gnn_architecture,
                              gnn_drop_out=gnn_drop_out,
                              train_epoch=train_epoch,

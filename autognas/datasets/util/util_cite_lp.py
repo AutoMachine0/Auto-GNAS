@@ -1,6 +1,7 @@
 import os
 import torch
 import numpy as np
+from autognas.util import Batch
 from torch_geometric.datasets import Planetoid
 from torch_geometric.utils import negative_sampling
 from torch_geometric.transforms import RandomLinkSplit
@@ -16,7 +17,10 @@ class DATA(object):
                  train_splits=None,
                  val_splits=None,
                  shuffle_flag=False,
-                 random_seed=123):
+                 random_seed=123,
+                 train_batch_size=1,
+                 val_batch_size=1,
+                 test_batch_size=1):
 
         if dataset == "cora_lp":
             dataset = "cora"
@@ -76,6 +80,31 @@ class DATA(object):
 
         self.val_y = [val_data.edge_label.to(device)]
         self.test_y = [test_data.edge_label.to(device)]
+
+        # batch process
+        self.batch_train_x_list, \
+        self.batch_train_edge_index_list, \
+        self.batch_train_y_list, \
+        self.batch_train_x_index_list = Batch(self.train_x,
+                                              self.train_edge_index,
+                                              self.train_y,
+                                              train_batch_size).data
+
+        self.batch_val_x_list, \
+        self.batch_val_edge_index_list, \
+        self.batch_val_y_list, \
+        self.batch_val_x_index_list = Batch(self.val_x,
+                                            self.val_edge_index,
+                                            self.val_y,
+                                            val_batch_size).data
+
+        self.batch_test_x_list, \
+        self.batch_test_edge_index_list, \
+        self.batch_test_y_list, \
+        self.batch_test_x_index_list = Batch(self.test_x,
+                                             self.test_edge_index,
+                                             self.test_y,
+                                             test_batch_size).data
 
         self.num_features = data.num_features
         self.num_labels = 2

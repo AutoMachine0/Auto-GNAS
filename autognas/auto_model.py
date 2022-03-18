@@ -19,19 +19,32 @@ class AutoModel(object):
     Args:
         data: graph data obj
             the target graph data object including required attributes:
-            1.train_x, 2.train_y, 3.train_edge_index
-            4.val_x, 5.val_y, 6.val_edge_index
-            7.test_x, 8.test_y, 9.test_edge_index
-            10. num_features, 11.num_labels, 12.data_name
+            1.batch_train_x_list
+            2.batch_train_edge_index_list
+            3.batch_train_y_list
+            4.batch_train_x_index_list
+            5.batch_val_x_list
+            6.batch_val_edge_index_list
+            7.batch_val_y_list
+            8.batch_val_x_index_list
+            9.batch_test_x_list
+            10.batch_test_edge_index_list
+            11.batch_test_y_list
+            12.batch_test_x_index_list
+            13. num_features
+            14.num_labels
+            15.data_name
+
         search_parameter: dict
             the search algorithm configuration dict to control the
             automatic search process including required attributes:
             1.search_algorithm_type, 2.test_gnn_num
+
         gnn_parameter: dict
             the gnn configuration dict to complete the gnn model train
             validate and test based on the gnn architecture, for the
             stack gcn architecture, the required attributes includes:
-            1.gnn_type,2.gnn_layers,3.downstream_task_type,
+            1.gnn_type,2.gnn_layers,3.downstream_task_type
             4.gnn_drop_out,5.train_epoch,6.early_stop
             7.early_stop_patience,8.opt_type,9.opt_type_dict
             10.loss_type,11.val_evaluator_type,12.val_evaluator_type

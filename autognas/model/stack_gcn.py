@@ -1,5 +1,4 @@
 import torch
-from autognas.model.util import batch_util
 from autognas.model.stack_gcn_encoder.gcn_encoder import GcnEncoder
 from autognas.model.logger import gnn_architecture_performance_save,\
                                   test_performance_save,\
@@ -18,10 +17,21 @@ class StackGcn(object):
     Args:
         graph_data: graph data obj
             the target graph data object including required attributes:
-            1.train_x, 2.train_y, 3.train_edge_index
-            4.val_x, 5.val_y, 6.val_edge_index
-            7.test_x, 8.test_y, 9.test_edge_index
-            10. num_features, 11.num_labels, 12.data_name
+            1.batch_train_x_list
+            2.batch_train_edge_index_list
+            3.batch_train_y_list
+            4.batch_train_x_index_list
+            5.batch_val_x_list
+            6.batch_val_edge_index_list
+            7.batch_val_y_list
+            8.batch_val_x_index_list
+            9.batch_test_x_list
+            10.batch_test_edge_index_list
+            11.batch_test_y_list
+            12.batch_test_x_index_list
+            13. num_features
+            14.num_labels
+            15.data_name
         gnn_architecture: list
             the stack gcn architecture describe
             for example: ['gcn', 'sum',  1, 64, 'tanh', 'gcn', 'sum', 1, 64, 'tanh']
@@ -62,9 +72,6 @@ class StackGcn(object):
     def __init__(self,
                  graph_data,
                  downstream_task_type="node_classification",
-                 train_batch_size=1,
-                 val_batch_size=1,
-                 test_batch_size=1,
                  gnn_architecture=['gcn', 'sum',  1, 128, 'relu', 'gcn', 'sum', 1, 64, 'linear'],
                  gnn_drop_out=0.6,
                  train_epoch=100,
@@ -80,9 +87,6 @@ class StackGcn(object):
 
         self.graph_data = graph_data
         self.downstream_task_type = downstream_task_type
-        self.train_batch_size = train_batch_size
-        self.val_batch_size = val_batch_size
-        self.test_batch_size = test_batch_size
         self.gnn_architecture = gnn_architecture
         self.gnn_drop_out = gnn_drop_out
         self.train_epoch = train_epoch
@@ -100,6 +104,7 @@ class StackGcn(object):
         self.test_batch_id = 0
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
         self.gnn_model = GcnEncoder(self.gnn_architecture,
                                     self.graph_data.num_features,
                                     dropout=self.gnn_drop_out,
@@ -119,13 +124,6 @@ class StackGcn(object):
 
     def fit(self):
         # training on the training dataset based on training batch dataset
-        batch_train_x_list, \
-        batch_train_edge_index_list, \
-        batch_train_y_list, \
-        batch_train_x_index_list = batch_util(self.train_batch_size,
-                                              self.graph_data.train_x,
-                                              self.graph_data.train_edge_index,
-                                              self.graph_data.train_y)
 
         for epoch in range(1, self.train_epoch + 1):
 
@@ -135,13 +133,13 @@ class StackGcn(object):
             train_y_list = []
             one_epoch_train_loss_list = []
 
-            for train_x, train_edge_index, train_y in zip(batch_train_x_list,
-                                                          batch_train_edge_index_list,
-                                                          batch_train_y_list):
+            for train_x, train_edge_index, train_y in zip(self.graph_data.batch_train_x_list,
+                                                          self.graph_data.batch_train_edge_index_list,
+                                                          self.graph_data.batch_train_y_list):
 
                 node_embedding_matrix = self.gnn_model(train_x, train_edge_index)
                 train_predict_y = self.downstream_task_model(node_embedding_matrix,
-                                                             batch_train_x_index_list[self.train_batch_id],
+                                                             self.graph_data.batch_train_x_index_list[self.train_batch_id],
                                                              mode="train")
 
                 self.train_batch_id += 1
@@ -165,23 +163,15 @@ class StackGcn(object):
             val_loss_list = []
             early_stop_flag = False
 
-            batch_val_x_list, \
-            batch_val_edge_index_list, \
-            batch_val_y_list, \
-            batch_val_x_index_list = batch_util(self.val_batch_size,
-                                                self.graph_data.val_x,
-                                                self.graph_data.val_edge_index,
-                                                self.graph_data.val_y)
-
-            for val_x, val_edge_index, val_y in zip(batch_val_x_list,
-                                                    batch_val_edge_index_list,
-                                                    batch_val_y_list):
+            for val_x, val_edge_index, val_y in zip(self.graph_data.batch_val_x_list,
+                                                    self.graph_data.batch_val_edge_index_list,
+                                                    self.graph_data.batch_val_y_list):
 
                 node_embedding_matrix = self.gnn_model(val_x,
                                                        val_edge_index)
 
                 val_predict_y = self.downstream_task_model(node_embedding_matrix,
-                                                           batch_val_x_index_list[self.val_batch_id],
+                                                           self.graph_data.batch_val_x_index_list[self.val_batch_id],
                                                            mode="val")
 
                 self.val_batch_id += 1
@@ -209,12 +199,14 @@ class StackGcn(object):
         for train_predict_y, train_y in zip(train_predict_y_list,
                                             train_y_list):
 
-            train_performance += self.val_evaluator.function(train_predict_y, train_y)
+            train_performance += self.val_evaluator.function(train_predict_y,
+                                                             train_y)
 
         for val_predict_y, val_y in zip(val_predict_y_list,
                                         val_y_list):
 
-            val_performance += self.val_evaluator.function(val_predict_y, val_y)
+            val_performance += self.val_evaluator.function(val_predict_y,
+                                                           val_y)
 
         train_performance = train_performance/self.train_batch_id
 
@@ -244,22 +236,15 @@ class StackGcn(object):
         test_loss_list = []
         test_y_list = []
 
-        batch_test_x_list, \
-        batch_test_edge_index_list, \
-        batch_test_y_list, \
-        batch_test_x_index_list = batch_util(self.test_batch_size,
-                                             self.graph_data.test_x,
-                                             self.graph_data.test_edge_index,
-                                             self.graph_data.test_y)
-
         self.gnn_model.eval()
 
-        for test_x, test_edge_index, test_y in zip(batch_test_x_list,
-                                                   batch_test_edge_index_list,
-                                                   batch_test_y_list):
+        for test_x, test_edge_index, test_y in zip(self.graph_data.batch_test_x_list,
+                                                   self.graph_data.batch_test_edge_index_list,
+                                                   self.graph_data.batch_test_y_list):
+
             node_embedding_matrix = self.gnn_model(test_x, test_edge_index)
             test_predict_y = self.downstream_task_model(node_embedding_matrix,
-                                                        batch_test_x_index_list[self.test_batch_id],
+                                                        self.graph_data.batch_test_x_index_list[self.test_batch_id],
                                                         mode="test")
             self.test_batch_id += 1
             test_loss = self.loss.function(test_predict_y, test_y)
@@ -311,20 +296,21 @@ class StackGcn(object):
 if __name__=="__main__":
 
     # node classification test
-    graph = Planetoid("cora").data
 
-    model = StackGcn(graph,
-                     train_epoch=10,
-                     train_epoch_test=100,
-                     gnn_architecture=['gcn', 'softmax_sum',  1, 128, 'relu', 'gat', 'sum', 1, 64, 'linear'],
-                     downstream_task_type="node_classification",
-                     val_evaluator_type="accuracy",
-                     test_evaluator_type=["accuracy", "precision", "recall", "f1_value"])
-    model.evaluate()
+    # graph = Planetoid("cora").data
+    #
+    # model = StackGcn(graph,
+    #                  train_epoch=100,
+    #                  train_epoch_test=100,
+    #                  gnn_architecture=['gcn', 'sum',  1, 128, 'relu', 'gcn', 'sum', 1, 128, 'relu'],
+    #                  downstream_task_type="node_classification",
+    #                  val_evaluator_type="accuracy",
+    #                  test_evaluator_type=["accuracy", "precision", "recall", "f1_value"])
+    # model.evaluate()
 
-    # graph classification test
 
     # link prediction test
+
     # graph = Planetoid("cora_lp",
     #                   train_splits=0.85,
     #                   val_splits=0.05,
@@ -343,18 +329,20 @@ if __name__=="__main__":
     #                  )
     # model.evaluate()
 
-    # graph = Planetoid("AIDS").data
-    #
-    # model = StackGcn(graph,
-    #                  gnn_architecture=['linear', 'mean', 8, 256, 'sigmoid', 'cos', 'max', 4, 128, 'softplus'],
-    #                  downstream_task_type="graph_classification",
-    #                  train_batch_size=50,
-    #                  val_batch_size=10,
-    #                  test_batch_size=10,
-    #                  train_epoch=10,
-    #                  train_epoch_test=100,
-    #                  gnn_drop_out=0.5,
-    #                  loss_type="cross_entropy_loss",
-    #                  val_evaluator_type="accuracy",
-    #                  test_evaluator_type=["accuracy", "precision", "recall", "f1_value"])
-    # model.evaluate()
+    # graph classification test
+
+    graph = Planetoid("AIDS",
+                      train_batch_size=50,
+                      val_batch_size=10,
+                      test_batch_size=10).data
+
+    model = StackGcn(graph,
+                     gnn_architecture=['gcn', 'sum', 1, 128, 'relu', 'gcn', 'sum', 1, 128, 'relu'],
+                     downstream_task_type="graph_classification",
+                     train_epoch=100,
+                     train_epoch_test=100,
+                     gnn_drop_out=0.5,
+                     loss_type="cross_entropy_loss",
+                     val_evaluator_type="accuracy",
+                     test_evaluator_type=["accuracy", "precision", "recall", "f1_value"])
+    model.evaluate()

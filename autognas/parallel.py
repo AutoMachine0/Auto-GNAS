@@ -34,10 +34,21 @@ class ParallelOperater(object):
     Args:
         data: graph data obj
             the target graph data object including required attributes:
-            1.train_x, 2.train_y, 3.train_edge_index
-            4.val_x, 5.val_y, 6.val_edge_index
-            7.test_x, 8.test_y, 9.test_edge_index
-            10. num_features, 11.num_labels, 12.data_name
+            1.batch_train_x_list
+            2.batch_train_edge_index_list
+            3.batch_train_y_list
+            4.batch_train_x_index_list
+            5.batch_val_x_list
+            6.batch_val_edge_index_list
+            7.batch_val_y_list
+            8.batch_val_x_index_list
+            9.batch_test_x_list
+            10.batch_test_edge_index_list
+            11.batch_test_y_list
+            12.batch_test_x_index_list
+            13. num_features
+            14.num_labels
+            15.data_name
         gnn_parameter: dict
             the gnn model training validation testing config dict
 

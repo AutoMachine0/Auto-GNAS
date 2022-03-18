@@ -57,7 +57,7 @@ class GcnEncoder(torch.nn.Module):
 
             if layer == self.layer_num - 1 or self.layer_num == 1:
                 concat = False
-
+            # 加入pooling结构
             self.gnn_layers_list.append(MessagePassingNet(input_dim,
                                                           hidden_dimension_num,
                                                           multi_heads_num,

@@ -4,13 +4,13 @@ from autognas.auto_model import AutoModel
 from autognas.parallel import ParallelConfig
 from autognas.datasets.planetoid import Planetoid
 
-ParallelConfig(True)
+ParallelConfig(False)
 graph = Planetoid("cora").data
 config = configparser.ConfigParser()
 
 config_path = os.path.abspath(os.path.join(os.getcwd(), "..")) + "/config/node_classification_config/"
 
-configuration = ["genetic.ini", "graphpas.ini", "graphnas.ini", "random.ini"]
+configuration = ["graphpas.ini"]
 for sub_config in configuration:
     config.read(config_path+sub_config)
     search_parameter = dict(config.items('search_parameter'))

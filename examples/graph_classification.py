@@ -4,13 +4,20 @@ from autognas.auto_model import AutoModel
 from autognas.parallel import ParallelConfig
 from autognas.datasets.planetoid import Planetoid
 
-ParallelConfig(True)
-graph = Planetoid("PROTEINS", shuffle_flag=True).data
+# ParallelConfig(True)
+ParallelConfig(False)
+
+graph = Planetoid("PROTEINS",
+                  shuffle_flag=True,
+                  train_batch_size=100,
+                  val_batch_size=10,
+                  test_batch_size=10).data
+
 config = configparser.ConfigParser()
 
 config_path = os.path.abspath(os.path.join(os.getcwd(), "..")) + "/config/graph_classification_config/"
 
-configuration = ["genetic.ini", "graphpas.ini", "graphnas.ini", "random.ini"]
+configuration = ["graphpas.ini"]
 
 for sub_config in configuration:
     config.read(config_path+sub_config)

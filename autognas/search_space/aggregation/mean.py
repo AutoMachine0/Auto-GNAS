@@ -2,7 +2,7 @@ import torch.nn
 from torch_scatter import scatter_mean
 
 class Aggregation(torch.nn.Module):
-     """
+   """
    Realizing mean aggregation manner for the source_node_representation_with_coefficient
 
    Args:
@@ -18,14 +18,14 @@ class Aggregation(torch.nn.Module):
           the node representation after sum aggregating
    """
 
-    def __init__(self):
-        super(Aggregation, self).__init__()
-        pass
+   def __init__(self):
+       super(Aggregation, self).__init__()
+       pass
 
-    def function(self,
-                 source_node_representation_with_coefficient,
-                 edge_index):
-        node_representation_agg_based_on_edge_target = scatter_mean(source_node_representation_with_coefficient,
-                                                                    edge_index[1],
-                                                                    dim=0)
-        return node_representation_agg_based_on_edge_target
+   def function(self,
+                source_node_representation_with_coefficient,
+                edge_index):
+       node_representation_agg_based_on_edge_target = scatter_mean(source_node_representation_with_coefficient,
+                                                                   edge_index[1],
+                                                                   dim=0)
+       return node_representation_agg_based_on_edge_target
