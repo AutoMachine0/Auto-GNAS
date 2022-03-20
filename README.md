@@ -234,7 +234,7 @@ graph = Planetoid("ADIS").data
 - *Data mini batch operation is decoupled from estimation process* *&radic;*
 
 ### Function
-- *Reconstruct input graph data class standard for autognas, require the input graph data class that have done mini-batch data pre-processing*
+- *Reconstruct input graph data class standard for autognas, require the input graph data class that have done mini-batch data pre-processing* *&radic;*
 
 ## Citing
 If you think Auto-GNAS is useful tool for you, please cite our paper, thank you for your support:
