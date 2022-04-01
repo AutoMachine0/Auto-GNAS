@@ -1,3 +1,5 @@
+<div align=left> <img src="pic/AutoGNAS.pdf" height="100%" width="100%"/> </div>
+
 # Automatic Graph Neural Architecture Search
 
 - Auto-GNAS is a general parallel graph neural architecture search framework for researchers and developers to achieve different tasks on graph.
