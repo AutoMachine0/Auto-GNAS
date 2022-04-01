@@ -1,4 +1,4 @@
-<div align=center> <img src="pic/AutoGNAS.png" height="75%" width="50%"/> </div>
+<div align=center> <img src="pic/AutoGNAS.png" height="85%" width="65%"/> </div>
 
 # Automatic Graph Neural Architecture Search
 
