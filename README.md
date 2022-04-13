@@ -27,15 +27,21 @@
   - Auto-GNAS provides an interface for user-defined search algorithms to easily achieve parallel evaluation capabilities based on CPU or GPU. 
   
 
-## Installing For Ubuntu
+## Installing For Ubuntu 16.04
 
-- **Ensure you have installed CUDA 11.1 before installing other packages**
+- **Ensure you have installed CUDA 10.2 before installing other packages**
 
-**1. Nvidia and CUDA 11.1:**
+**1. Nvidia and CUDA 10.2:**
 
 ```python
-(Nvidia)    https://www.nvidia.cn/Download/index.aspx?lang=cn
-(CUDA 11.1) https://developer.nvidia.com/search?page=1&sort=relevance&term=cuda%20toolkit%2011.0
+[Nvidia Driver] 
+https://www.nvidia.cn/Download/index.aspx?lang=cn
+
+[CUDA 10.2 Download and install command] 
+#download:
+wget https://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_440.33.01_linux.run
+#install:
+sudo sh cuda_10.2.89_440.33.01_linux.run
 
 ```
 
@@ -46,15 +52,15 @@ conda create -n autognas python=3.7
 source activate autognas
 ```
 
-**3. Pytorch:** execute the following command in your conda env autognas
+**3. Pytorch 11.1.0:** execute the following command in your conda env autognas
 
 ```python
-pip3 install torch==1.8.2+cu111 torchvision==0.9.2+cu111 torchaudio==0.8.2 -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html
+pip3 install torch torchvision torchaudio
 ```
 
 **4. Pytorch Geometric:** execute the following command in your conda env autognas
 ```python
-pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.8.0+cu111.html
+pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.11.0+cu102.html
 ```
 **5. Ray:** execute the following command in your conda env autognas
 ```python
