@@ -37,10 +37,10 @@
 [Nvidia Driver] 
 https://www.nvidia.cn/Download/index.aspx?lang=cn
 
-[CUDA 10.2 Download and install command] 
-#download:
+[CUDA 10.2 Download and Install Command] 
+#Download:
 wget https://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_440.33.01_linux.run
-#install:
+#Install:
 sudo sh cuda_10.2.89_440.33.01_linux.run
 
 ```
