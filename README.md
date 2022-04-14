@@ -1,4 +1,7 @@
-<div align=center> <img src="pic/AutoGNAS.png" height="85%" width="65%"/> </div>
+<div align=center> <img src="pic/logo.svg" height="100%" width="100%"/> </div>
+
+
+[![license](https://img.shields.io/badge/license-MIT-orange)](https://github.com/AutoMachine0/Auto-GNAS/blob/master/LICENSE)
 
 # Automatic Graph Neural Architecture Search
 
@@ -7,7 +10,7 @@
 - The framework of Auto-GNAS is as follows:
 
 <br>
-<div align=left> <img src="pic/Auto-GNAS_framework.png" height="100%" width="100%"/> </div>
+<div align=left> <img src="pic/Auto-GNAS_framework.svg" height="100%" width="100%"/> </div>
 
 
 ## News
