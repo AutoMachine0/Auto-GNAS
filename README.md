@@ -3,8 +3,6 @@
 
 [![license](https://img.shields.io/badge/license-MIT-orange)](https://github.com/AutoMachine0/Auto-GNAS/blob/master/LICENSE)
 
-<div align=center> <img src="pic/logo.svg" height="85%" width="65%"/> </div>
-
 # Automatic Graph Neural Architecture Search
 
 - Auto-GNAS is a general parallel graph neural architecture search framework for researchers and developers to achieve different tasks on graph.
