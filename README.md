@@ -1,7 +1,7 @@
 <div align=center> <img src="pic/logo.svg" height="100%" width="100%"/> </div>
 
 
-[![license](https://img.shields.io/badge/license-MIT-orange)](https://github.com/AutoMachine0/Auto-GNAS/blob/master/LICENSE)
+(center)[![license](https://img.shields.io/badge/license-MIT-orange)](https://github.com/AutoMachine0/Auto-GNAS/blob/master/LICENSE)(/center)
 
 # Automatic Graph Neural Architecture Search
 
