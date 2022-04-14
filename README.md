@@ -185,11 +185,11 @@ model.evaluate()
 
 | Architecture Component| Value |
 |:-:|:-:|
-| **Attention**       | gat / gcn / cos / const / sym-gat / linear / gene-linear|
-| **Aggregation**      |mean / max / sum / min /softmax_sum |
-| **Multi-head number** | 1 / 2 / 4 / 6 / 8|
-| **Hidden Dimension**  | 8 / 16 / 32 / 64 / 128 / 256|
-| **Activation**      | tanh / sigmoid / relu / linear / relu6 / elu / leaky_relu / softplus|
+| **Attention**       | gat / gcn / cos / const / sym-gat / linear / gene-linear |
+| **Aggregation**      | mean / max / sum / min / softmax_sum |
+| **Multi-head number** | 1 / 2 / 4 / 6 / 8 |
+| **Hidden Dimension**  | 8 / 16 / 32 / 64 / 128 / 256 |
+| **Activation**      | tanh / sigmoid / relu / linear / relu6 / elu / leaky_relu / softplus |
 
 **2. Search Algorithm**
 
